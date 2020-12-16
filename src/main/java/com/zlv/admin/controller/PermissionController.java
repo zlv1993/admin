@@ -5,6 +5,7 @@ import com.zlv.admin.domain.Permission;
 import com.zlv.admin.domain.User;
 import com.zlv.admin.service.PermissionService;
 import com.zlv.admin.service.UserService;
+import com.zlv.admin.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +19,14 @@ public class PermissionController {
     @Autowired
   private PermissionService permissionService;
     @RequestMapping("/findAll")
-  private List<Permission> findAll(){
+  private R findAll(){
+
        List<Permission> permission=  permissionService.getAll();
-    return permission;
+    return  R.ok(permission);
   }
+    @RequestMapping("/getTree")
+  private List<Permission> getTree(){
+        List<Permission> permission=  permissionService.getTree();
+        return permission;
+    }
 }

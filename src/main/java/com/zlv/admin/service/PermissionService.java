@@ -16,4 +16,7 @@ public class PermissionService {
     public List<Permission> getAll(){
         return permissionMapper.getAll();
     }
+    public List<Permission> getTree(){
+        return permissionMapper.getTree();
+    }
 }
