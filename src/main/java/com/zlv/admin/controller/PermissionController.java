@@ -2,10 +2,12 @@ package com.zlv.admin.controller;
 
 
 import com.zlv.admin.domain.Permission;
+import com.zlv.admin.domain.PermissionVo;
 import com.zlv.admin.domain.User;
 import com.zlv.admin.service.PermissionService;
 import com.zlv.admin.service.UserService;
 import com.zlv.admin.utils.R;
+import com.zlv.admin.utils.TreeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,8 +27,8 @@ public class PermissionController {
     return  R.ok(permission);
   }
     @RequestMapping("/getTree")
-  private List<Permission> getTree(){
+  private List<PermissionVo> getTree(){
         List<Permission> permission=  permissionService.getTree();
-        return permission;
+        return TreeUtil.getTree(permission);
     }
 }
