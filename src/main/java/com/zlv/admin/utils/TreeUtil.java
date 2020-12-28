@@ -51,8 +51,9 @@ public class TreeUtil<T> {
             fieldTag.setAccessible(true);
             int pid = (int) fieldTag.get(t);
             if(id==pid){
-                Field fieldChildren = clazz.getDeclaredField("children");
-                List<T> children= (List<T>)fieldTag.get(t);
+                Field fieldChildren = parentClazz.getDeclaredField("children");
+                fieldChildren.setAccessible(true);
+                List<T> children= (List<T>)fieldChildren.get(fatherNode);
                 //添加到子节点数组
                 children.add(t);
                 //递归调用 继续找该子节点  是否还有子节点
