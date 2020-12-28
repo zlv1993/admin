@@ -20,11 +20,12 @@
             <result property="role" column="role" />
         </collection>
     </resultMap>
+
     <select id="getAll" resultMap="permissionRole">
        select  p.id, p.pid,p.url,p.path,  p.component,p.name,p.icon, p.type, p.create_time pcreateTime, p.update_time pPupdateTime,       r.id rid,r.name rname,r.desc,r.role  from sp_permission p, sp_role_permission rp,sp_role r where p.id=rp.permission_id and r.id=rp.role_id
     </select>
 
-    <select id="getTree" resultType="Permission">
+    <select id="getTree" resultType="PermissionVo">
        select  *  from sp_permission
     </select>
 

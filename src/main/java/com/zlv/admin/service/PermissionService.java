@@ -3,6 +3,7 @@ package com.zlv.admin.service;
 
 
 import com.zlv.admin.domain.Permission;
+import com.zlv.admin.domain.PermissionVo;
 import com.zlv.admin.mapper.PermissionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public class PermissionService {
     public List<Permission> getAll(){
         return permissionMapper.getAll();
     }
-    public List<Permission> getTree(){
+    public List<PermissionVo> getTree(){
         return permissionMapper.getTree();
     }
 }

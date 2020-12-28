@@ -27,8 +27,9 @@ public class PermissionController {
     return  R.ok(permission);
   }
     @RequestMapping("/getTree")
-  private List<PermissionVo> getTree(){
-        List<Permission> permission=  permissionService.getTree();
-        return TreeUtil.getTree(permission);
+  private List<PermissionVo> getTree() throws NoSuchMethodException, NoSuchFieldException, InstantiationException, IllegalAccessException {
+        List<PermissionVo> permission=  permissionService.getTree();
+        TreeUtil<PermissionVo> treeUtil=new TreeUtil<>();
+        return treeUtil.getTree(permission,"id","pid");
     }
 }
