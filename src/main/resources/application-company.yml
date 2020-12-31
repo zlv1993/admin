@@ -7,6 +7,11 @@ spring:
 mybatis:
   type-aliases-package: com.zlv.admin.domain
   mapper-locations: classpath:mapper/*.xml
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
 server:
   port: 1234
 jwt:
