@@ -20,4 +20,6 @@ public class PermissionService {
     public List<PermissionVo> getTree(){
         return permissionMapper.getTree();
     }
+    public int addPermission(Permission permission){return  permissionMapper.addPermission(permission);}
+    public int deletePermission(int id){return  permissionMapper.deletePermission(id);}
 }

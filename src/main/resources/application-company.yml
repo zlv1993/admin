@@ -2,8 +2,10 @@ spring:
   datasource:
     username: root
     password: 123456789
-    url: jdbc:mysql://localhost:3306/front?characterEncoding=utf-8&useSSL=true&serverTimezone=GMT
+    url: jdbc:mysql://localhost:3306/front?characterEncoding=utf-8&useSSL=true&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
+  jackson:
+    time-zone: GMT+8
 mybatis:
   type-aliases-package: com.zlv.admin.domain
   mapper-locations: classpath:mapper/*.xml

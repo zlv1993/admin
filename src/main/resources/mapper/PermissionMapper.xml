@@ -28,6 +28,10 @@
     <select id="getTree" resultType="PermissionVo">
        select  *  from sp_permission
     </select>
-
-
+    <insert id="addPermission" parameterType="Permission" useGeneratedKeys="true"  keyColumn="id" keyProperty="id">
+       insert into sp_permission (pid,url,path,component,name,icon,type,create_time) values(#{pid},#{url},#{path},#{component},#{name},#{icon},#{type},#{createTime})
+    </insert>
+   <delete id="deletePermission" parameterType="int">
+       delete from  sp_permission  where  id=#{id}
+   </delete>
 </mapper>

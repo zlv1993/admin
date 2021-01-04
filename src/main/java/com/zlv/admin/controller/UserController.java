@@ -24,10 +24,12 @@ public class UserController {
     return user;
   }
     @RequestMapping("/findAll")
-  private  PageUtil findAll(){
-      PageHelper.startPage(2,0);
+  public PageUtil findAll(){
+      PageHelper.startPage(2,2);
+
       List<User> allUser= userService.findAll();
-      PageUtil pageUtil=new PageUtil(allUser);
+      PageInfo<User> pageInfo =new PageInfo<>(allUser);
+      PageUtil<User> pageUtil=new PageUtil<>(pageInfo);
       return pageUtil;
   }
 }
