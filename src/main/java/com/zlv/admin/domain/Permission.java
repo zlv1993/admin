@@ -15,7 +15,6 @@ public class Permission {
     private Date createTime;
     private Date updateTime;
     private List<Role> roles;
-
     public Permission() {
     }
 

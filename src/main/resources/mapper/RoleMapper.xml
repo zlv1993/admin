@@ -6,4 +6,14 @@
         select * from sp_role where id=#{id}
     </select>
 
+    <select id="getAll" resultType="Role">
+        select * from sp_role
+    </select>
+
+    <delete id="del">
+        delete from  sp_role where id=#{id}
+    </delete>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into sp_role (role,name,desc,create_time) values (#{role},#{name},#{desc},#{createTime})
+    </insert>
 </mapper>
