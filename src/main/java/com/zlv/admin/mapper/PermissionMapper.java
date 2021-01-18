@@ -11,7 +11,7 @@ import java.util.List;
 @Mapper
 public interface PermissionMapper {
     List<Permission> getAll();
-    List<PermissionVo> getTree(int id);
+    List<PermissionVo> getPermission(String username);
     int addPermission(Permission permission);
     int deletePermission(int id);
 }

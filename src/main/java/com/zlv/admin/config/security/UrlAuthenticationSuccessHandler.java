@@ -35,7 +35,7 @@ public class UrlAuthenticationSuccessHandler implements AuthenticationSuccessHan
         User user= (User)authentication.getPrincipal();
 
         try {
-            List<PermissionVo> permission=  permissionService.getTree(user.getId());
+            List<PermissionVo> permission=  permissionService.getPermission(user.getUsername());
             TreeUtil<PermissionVo> treeUtil=new TreeUtil<>();
             List<PermissionVo> trees=treeUtil.getTree(permission,"id","pid");
             String token= jwtTokenUtil.generateToken(user);

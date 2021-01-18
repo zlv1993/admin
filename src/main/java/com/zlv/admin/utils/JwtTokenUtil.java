@@ -16,7 +16,7 @@ import java.util.Map;
 @Component
 public class JwtTokenUtil {
     private static final Logger logger = LoggerFactory.getLogger(JwtTokenUtil.class);
-    private static final String CLAIM_KEY_USERNAME = "sub";
+    private static final String CLAIM_KEY_USERNAME = "subject";
     private static final String CLAIM_KEY_CREATED = "created";
     @Value("${jwt.secret}")
     private String secret;
@@ -80,7 +80,8 @@ public class JwtTokenUtil {
         String username = null;
         try {
             Claims claims = this.getClaimsFromToken(token);
-            username = claims.getSubject();
+            Object usernameObj = claims.get(CLAIM_KEY_USERNAME);
+            username = usernameObj != null ? usernameObj.toString() : username;
         } catch (Exception e) {
             logger.info("JWT解析token失败:{}", token);
         }

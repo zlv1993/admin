@@ -17,8 +17,8 @@ public class PermissionService {
     public List<Permission> getAll(){
         return permissionMapper.getAll();
     }
-    public List<PermissionVo> getTree(int id){
-        return permissionMapper.getTree(id);
+    public List<PermissionVo> getPermission(String username){
+        return permissionMapper.getPermission(username);
     }
     public int addPermission(Permission permission){return  permissionMapper.addPermission(permission);}
     public int deletePermission(int id){return  permissionMapper.deletePermission(id);}

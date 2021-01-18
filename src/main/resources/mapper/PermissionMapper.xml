@@ -25,13 +25,21 @@
        select  p.id, p.pid,p.url,p.path,  p.component,p.name,p.icon, p.type, p.create_time pcreateTime, p.update_time pPupdateTime,       r.id rid,r.name rname,r.desc,r.role  from sp_permission p, sp_role_permission rp,sp_role r where p.id=rp.permission_id and r.id=rp.role_id
     </select>
 
-    <select id="getTree" resultType="PermissionVo">
+<!--    <select id="getTree" resultType="PermissionVo">-->
+<!--       select  p.*  from sp_permission p,sp_user u,sp_role r,sp_role_permission rp,sp_user_role ur where-->
+<!--       rp.permission_id=p.id-->
+<!--       and r.id=rp.role_id-->
+<!--       and ur.role_id=r.id-->
+<!--       and u.id=ur.user_id-->
+<!--       and u.id=#{id}-->
+<!--    </select>-->
+    <select id="getPermission" resultType="PermissionVo">
        select  p.*  from sp_permission p,sp_user u,sp_role r,sp_role_permission rp,sp_user_role ur where
        rp.permission_id=p.id
        and r.id=rp.role_id
        and ur.role_id=r.id
        and u.id=ur.user_id
-       and u.id=#{id}
+       and u.username=#{name}
     </select>
     <insert id="addPermission" parameterType="Permission" useGeneratedKeys="true"  keyColumn="id" keyProperty="id">
        insert into sp_permission (pid,url,path,component,name,icon,type,create_time) values(#{pid},#{url},#{path},#{component},#{name},#{icon},#{type},#{createTime})

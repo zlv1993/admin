@@ -15,6 +15,9 @@ public class UserService {
     public User findById(int id){
         return userMapper.findById(id);
     }
+    public User findByName(String name){
+        return userMapper.findByName(name);
+    }
     public List<User> findAll(){
         return userMapper.findAll();
     }

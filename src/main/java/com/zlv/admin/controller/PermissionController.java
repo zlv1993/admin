@@ -6,9 +6,11 @@ import com.zlv.admin.domain.PermissionVo;
 import com.zlv.admin.domain.User;
 import com.zlv.admin.service.PermissionService;
 import com.zlv.admin.service.UserService;
+import com.zlv.admin.utils.JwtTokenUtil;
 import com.zlv.admin.utils.R;
 import com.zlv.admin.utils.TreeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
@@ -23,9 +25,12 @@ import java.util.List;
 public class PermissionController {
     @Autowired
   private PermissionService permissionService;
+    @Value("${jwt.tokenHead}")
+    private String tokenHead;
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
     @RequestMapping("/findAll")
   private R findAll(){
-
        List<Permission> permission=  permissionService.getAll();
     return  R.ok(permission);
   }
@@ -47,5 +52,13 @@ public class PermissionController {
         }else{
             return   R.fail(201,"删除失败",new ArrayList<>());
         }
+    }
+    @GetMapping("/get")
+    private R getByToken(String token){
+        String authToken=token.substring(this.tokenHead.length());
+        String userName = jwtTokenUtil.getUserNameFromToken(authToken);
+        List<PermissionVo> permissionVos=  permissionService.getPermission(userName);
+        return  R.ok(permissionVos);
+
     }
 }
