@@ -53,12 +53,14 @@ public class PermissionController {
             return   R.fail(201,"删除失败",new ArrayList<>());
         }
     }
-    @GetMapping("/get")
-    private R getByToken(String token){
+    @RequestMapping("/getByToken")
+    private R getByToken(String token) throws NoSuchMethodException, NoSuchFieldException, InstantiationException, IllegalAccessException {
         String authToken=token.substring(this.tokenHead.length());
         String userName = jwtTokenUtil.getUserNameFromToken(authToken);
         List<PermissionVo> permissionVos=  permissionService.getPermission(userName);
-        return  R.ok(permissionVos);
+        TreeUtil<PermissionVo> treeUtil=new TreeUtil<>();
+        List<PermissionVo> trees=treeUtil.getTree(permissionVos,"id","pid");
+        return  R.ok(trees);
 
     }
 }
