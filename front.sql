@@ -11,7 +11,7 @@
  Target Server Version : 80021
  File Encoding         : 65001
 
- Date: 15/12/2020 21:57:54
+ Date: 24/01/2021 23:17:46
 */
 
 SET NAMES utf8mb4;
@@ -25,11 +25,12 @@ CREATE TABLE `sp_permission` (
   `id` int NOT NULL COMMENT ' 权限id',
   `pid` int DEFAULT NULL COMMENT '父级id',
   `url` varchar(255) DEFAULT NULL COMMENT '路径',
-  `path` varchar(255) DEFAULT NULL COMMENT '前端页面路径',
+  `redirect` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '前端页面重定向地址',
   `component` varchar(255) DEFAULT NULL COMMENT '前端页面组建地址',
   `name` varchar(255) DEFAULT NULL COMMENT ' 页面名称',
   `icon` varchar(255) DEFAULT NULL COMMENT '前端页面展示图标',
   `type` tinyint DEFAULT NULL COMMENT '路径类别：1、目录，2、目录隐藏，3、',
+  `isShow` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT '0',
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -39,7 +40,13 @@ CREATE TABLE `sp_permission` (
 -- Records of sp_permission
 -- ----------------------------
 BEGIN;
-INSERT INTO `sp_permission` VALUES (1, 0, '/user', '/user', 'User', '用户', NULL, 1, NULL, NULL);
+INSERT INTO `sp_permission` VALUES (1, 0, '/permiss', '/permiss/user', 'Layout', '权限模块', NULL, 1, '1', NULL, NULL);
+INSERT INTO `sp_permission` VALUES (2, 1, '/permiss/user', '', '@/pages/permission/User', '用户管理', NULL, 1, '1', NULL, NULL);
+INSERT INTO `sp_permission` VALUES (3, 1, '/permiss/role', '', '@/pages/permission/Role', '角色管理', NULL, 1, '1', NULL, NULL);
+INSERT INTO `sp_permission` VALUES (4, 1, '/permiss/url', '', '@/pages/permission/Url', '权限管理', NULL, 1, '1', NULL, NULL);
+INSERT INTO `sp_permission` VALUES (5, 0, '/', '/dashboard', 'Layout', '首页', NULL, 1, '1', NULL, NULL);
+INSERT INTO `sp_permission` VALUES (6, 5, '/dashboard', '', '@/pages/Home', '首页 管理', NULL, 1, '0', NULL, NULL);
+INSERT INTO `sp_permission` VALUES (7, 3, '/add', '/add', 'add', '新增', NULL, 3, '0', NULL, NULL);
 COMMIT;
 
 -- ----------------------------
@@ -79,6 +86,12 @@ CREATE TABLE `sp_role_permission` (
 -- ----------------------------
 BEGIN;
 INSERT INTO `sp_role_permission` VALUES (1, 1);
+INSERT INTO `sp_role_permission` VALUES (1, 2);
+INSERT INTO `sp_role_permission` VALUES (1, 3);
+INSERT INTO `sp_role_permission` VALUES (1, 4);
+INSERT INTO `sp_role_permission` VALUES (1, 5);
+INSERT INTO `sp_role_permission` VALUES (1, 6);
+INSERT INTO `sp_role_permission` VALUES (1, 7);
 COMMIT;
 
 -- ----------------------------
