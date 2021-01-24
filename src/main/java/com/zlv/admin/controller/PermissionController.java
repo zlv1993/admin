@@ -58,9 +58,9 @@ public class PermissionController {
         String authToken=token.substring(this.tokenHead.length());
         String userName = jwtTokenUtil.getUserNameFromToken(authToken);
         List<PermissionVo> permissionVos=  permissionService.getPermission(userName);
-        TreeUtil<PermissionVo> treeUtil=new TreeUtil<>();
-        List<PermissionVo> trees=treeUtil.getTree(permissionVos,"id","pid");
-        return  R.ok(trees);
+        //TreeUtil<PermissionVo> treeUtil=new TreeUtil<>();
+        //List<PermissionVo> trees=treeUtil.getTree(permissionVos,"id","pid");
+        return  R.ok(permissionVos);
 
     }
 }

@@ -7,7 +7,7 @@ public class Permission {
     private int id;
     private int pid;
     private String url;
-    private String path;
+    private String redirect;
     private String component;
     private String name;
     private String icon;
@@ -18,11 +18,11 @@ public class Permission {
     public Permission() {
     }
 
-    public Permission(int id, int pid, String url, String path, String component, String name, String icon, int type, Date createTime, Date updateTime, List<Role> roles) {
+    public Permission(int id, int pid, String url, String redirect, String component, String name, String icon, int type, Date createTime, Date updateTime, List<Role> roles) {
         this.id = id;
         this.pid = pid;
         this.url = url;
-        this.path = path;
+        this.redirect = redirect;
         this.component = component;
         this.name = name;
         this.icon = icon;
@@ -56,12 +56,12 @@ public class Permission {
         this.url = url;
     }
 
-    public String getPath() {
-        return path;
+    public String getRedirect() {
+        return redirect ;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setRedirect(String redirect) {
+        this.redirect = redirect;
     }
 
     public String getComponent() {

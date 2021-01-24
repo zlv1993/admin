@@ -10,11 +10,12 @@ public class PermissionVo {
     private int id;
     private int pid;
     private String url;
-    private String path;
+    private String redirect;
     private String component;
     private String name;
     private String icon;
     private int type;
+    private int isShow;
     private Date createTime;
     private Date updateTime;
     private List<PermissionVo> children=new ArrayList<>();
