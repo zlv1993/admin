@@ -21,5 +21,6 @@ public class UserService {
     public List<User> list(String username, String role){
         return userMapper.list(username,role);
     }
-
+    public  int insert(User user){ return userMapper.insert(user);}
+    public int del(int id){return  userMapper.del(id);}
 }

@@ -19,4 +19,11 @@
     <select id="findByName" resultType="User">
         select * from sp_user where username=#{username}
     </select>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into sp_user (username,password,email,phone,nick_name,avator,address,create_time)
+        values (#{username},#{password},#{email}, #{phone},#{nickName},#{avator}, #{address}, #{createTime})
+    </insert>
+    <delete id="del" parameterType="int">
+        delete from sp_user where id=#{id}
+    </delete>
 </mapper>
