@@ -18,8 +18,8 @@ public class UserService {
     public User findByName(String name){
         return userMapper.findByName(name);
     }
-    public List<User> findAll(){
-        return userMapper.findAll();
+    public List<User> list(String username, String role){
+        return userMapper.list(username,role);
     }
 
 }

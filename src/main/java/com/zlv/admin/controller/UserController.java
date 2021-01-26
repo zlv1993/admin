@@ -28,7 +28,8 @@ public class UserController {
     @RequestMapping("/findById/{id}")
   private User findById(@PathVariable Integer id){
       User user=  userService.findById(id);
-    return user;
+       user.setPassword("");
+      return user;
   }
     @RequestMapping("/findByToken")
     private R findByToken(String token){
@@ -38,12 +39,14 @@ public class UserController {
       return R.ok(user);
     }
 
-    @RequestMapping("/findAll")
-  public PageUtil findAll(){
-      PageHelper.startPage(2,2);
-      List<User> allUser= userService.findAll();
+    @RequestMapping("/list")
+  public PageUtil list(int pageNum, int pageSize,String username, String role){
+      PageHelper.startPage(pageNum, pageSize);
+      List<User> allUser= userService.list(username,role);
       PageInfo<User> pageInfo =new PageInfo<>(allUser);
       PageUtil<User> pageUtil=new PageUtil<>(pageInfo);
       return pageUtil;
   }
+
+
 }

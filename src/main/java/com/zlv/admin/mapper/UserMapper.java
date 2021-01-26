@@ -12,5 +12,5 @@ import java.util.List;
 public interface  UserMapper {
      User findById(int id);
      User findByName(String username);
-     List<User> findAll();
+     List<User> list(String username, String role);
 }
