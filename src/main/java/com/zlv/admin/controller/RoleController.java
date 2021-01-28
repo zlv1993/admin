@@ -15,8 +15,8 @@ import java.util.List;
 public class RoleController {
     @Autowired
     private RoleService roleService;
-    @GetMapping("/getAll")
-    public R getAll(){
+    @GetMapping("/list")
+    public R list(){
         List<Role> roles=roleService.getAll();
         return R.ok(roles);
     }

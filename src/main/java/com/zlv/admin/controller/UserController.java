@@ -50,9 +50,9 @@ public class UserController {
   }
   @PostMapping("/insert")
   public R insert(@RequestBody  User user){
+      String password = bCryptPasswordEncoder.encode(user.getPassword());
+      user.setPassword(password);
     int num=  userService.insert(user);
-    String password = bCryptPasswordEncoder.encode(user.getPassword());
-    user.setPassword(password);
      if(num==1){
       return   R.ok();
      }else{
