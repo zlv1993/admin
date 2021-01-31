@@ -12,7 +12,7 @@ import java.util.List;
 public interface  UserMapper {
      User findById(int id);
      User findByName(String username);
-     List<User> list(String username, String role);
+     List<User> list(String username, Integer roleId);
      int insert(User user);
      int del(int id);
 }

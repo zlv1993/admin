@@ -4,6 +4,8 @@ package com.zlv.admin.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zlv.admin.domain.User;
+import com.zlv.admin.domain.UserRole;
+import com.zlv.admin.service.UserRoleService;
 import com.zlv.admin.service.UserService;
 import com.zlv.admin.utils.JwtTokenUtil;
 import com.zlv.admin.utils.PageUtil;
@@ -14,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
@@ -22,6 +25,8 @@ public class UserController {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
   private UserService userService;
+    @Autowired
+    private UserRoleService userRoleService;
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
     @Value("${jwt.tokenHead}")
@@ -41,20 +46,24 @@ public class UserController {
     }
 
     @RequestMapping("/list")
-  public PageUtil list(int pageNum, int pageSize,String username, String role){
+  public PageUtil list(int pageNum, int pageSize,String username, Integer roleId){
       PageHelper.startPage(pageNum, pageSize);
-      List<User> allUser= userService.list(username,role);
+      List<User> allUser= userService.list(username,roleId);
       PageInfo<User> pageInfo =new PageInfo<>(allUser);
       PageUtil<User> pageUtil=new PageUtil<>(pageInfo);
       return pageUtil;
   }
   @PostMapping("/insert")
-  public R insert(@RequestBody  User user){
+  public R insert(@RequestBody User user, UserRole userRole){
       String password = bCryptPasswordEncoder.encode(user.getPassword());
       user.setPassword(password);
-    int num=  userService.insert(user);
-     if(num==1){
-      return   R.ok();
+      userService.insert(user);
+
+      int userId= user.getId();
+      userRole.setUserId(userId);
+      int num=  userRoleService.insert(userRole);
+       if(num==1){
+         return   R.ok();
      }else{
          return R.fail(500,"插入失败",0);
      }
